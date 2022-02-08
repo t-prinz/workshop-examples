@@ -18,7 +18,7 @@
     ansible.builtin.git:
       dest: /var/tmp/gitrepo
       repo: "{{ git_repository }}"
-      version: "{{ git_version }}"
+      version: "{{ git_version | default() }}"
 
   - name: copy node app to webapp directory
     copy:
@@ -26,10 +26,10 @@
       src: /var/tmp/gitrepo/rhel/webdev/hello.js
       dest: /var/www/app/hello.js
 
-#  - name: remove the git repository
-#    file:
-#      path: /var/tmp/gitrepo
-#      state: absent
+  - name: remove the git repository
+    file:
+      path: /var/tmp/gitrepo
+      state: absent
 
 #  - name: copy node app to webapp directory
 #    copy:
