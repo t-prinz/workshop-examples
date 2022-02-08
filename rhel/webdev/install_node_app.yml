@@ -9,6 +9,8 @@
       state: directory
       mode: '0755'
 
+# TODO: get the file from a git repo
+
   - name: copy node app to webapp directory
     copy:
       src: hello.js
