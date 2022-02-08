@@ -11,10 +11,22 @@
 
 # TODO: get the file from a git repo
 
+  - name: Clone the repository
+    ansible.builtin.git:
+      dest: /var/tmp
+      repo: "{{ git_repository }}"
+      version: "{{ git_version }}"
+
   - name: copy node app to webapp directory
     copy:
-      src: hello.js
+      remote_src: true
+      src: /var/tmp/hello.js
       dest: /var/www/app/hello.js
+
+#  - name: copy node app to webapp directory
+#    copy:
+#      src: hello.js
+#      dest: /var/www/app/hello.js
 
   - name: restart nodejs
     systemd:
