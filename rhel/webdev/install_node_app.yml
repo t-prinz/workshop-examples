@@ -13,15 +13,20 @@
 
   - name: Clone the repository
     ansible.builtin.git:
-      dest: /var/tmp
+      dest: /var/tmp/gitrepo
       repo: "{{ git_repository }}"
       version: "{{ git_version }}"
 
   - name: copy node app to webapp directory
     copy:
       remote_src: true
-      src: /var/tmp/hello.js
+      src: /var/tmp/gitrepo/rhel/webdev/hello.js
       dest: /var/www/app/hello.js
+
+  - name: remove the git repository
+    file:
+      path: /var/tmp/gitrepo
+      state: absent
 
 #  - name: copy node app to webapp directory
 #    copy:
